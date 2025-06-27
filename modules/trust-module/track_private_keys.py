@@ -68,8 +68,8 @@ def scan_private_keys(scan_path, repo_file):
     ENC_found = False
     path_exists = False
 
-    print "path = ", scan_path
-    print "repo_file = ", repo_file
+    print("path = ", scan_path)
+    print("repo_file = ", repo_file)
 
 
     # --- Iterate from the root
@@ -113,7 +113,7 @@ def scan_private_keys(scan_path, repo_file):
     pass
 
     if( not path_exists):
-        print "\n\n>> Invalid path : %s\n\n" %scan_path
+        print("\n\n>> Invalid path : %s\n\n" %scan_path)
         return (-2)
     pass
 
@@ -189,9 +189,9 @@ def collect_keys(key_file, key_repo, Enc):
             key_found = True
             # --- If found, compare the path
             if loc_patt.search(line, re.IGNORECASE):  # ---
-                print "\nduplicate instance\n"
+                print("\nduplicate instance\n")
             else:
-                print "\nsame key different locattion\n"
+                print("\nsame key different locattion\n")
                 # ------
                 p = line[line.find("<") + 1:line.find(">")]
                 count = int(p) + 1
@@ -201,8 +201,8 @@ def collect_keys(key_file, key_repo, Enc):
                 prefix = prefix.replace(old_count, new_count)
                 suffix = " +" + key_file + "\n"
                 newline = prefix + suffix
-                print "\nThe old record = ", line
-                print " \nThe new record = ", newline
+                print("\nThe old record = ", line)
+                print(" \nThe new record = ", newline)
                 # f.close()
                 replace(key_repo, line, newline)
                 # ------
@@ -213,7 +213,7 @@ def collect_keys(key_file, key_repo, Enc):
     pass
     if (key_found == False):
         entry = "<1>:  " + en_flag + "  {" + file_hash + "} +" + key_file + "\n"
-        print entry
+        print(entry)
         f.write(entry)
         f.close()
     pass
@@ -234,15 +234,15 @@ pass
 # Returns       : None
 
 def usage(this_script):
-    print "\n\n    %s [-i] [-r] [-p]  " %this_script
-    print "\n      Purpose  : Seacrch for insecurly stored private keys, & collect the"
-    print "        findings in a common repository. This repository can be used to "
-    print "        find multiple instances of a private keys, location and track them."
-    print "\n"
-    print "        -i [--in]      : in put a private key file to search similar instances"
-    print "        -r [--repo]      : repository to note and compare the findings"
-    print "        -p [--path]      : path to search privet key in it"
-    print " \n\n\n"
+    print("\n\n    %s [-i] [-r] [-p]  " %this_script)
+    print("\n      Purpose  : Seacrch for insecurly stored private keys, & collect the")
+    print("        findings in a common repository. This repository can be used to ")
+    print("        find multiple instances of a private keys, location and track them.")
+    print("\n")
+    print("        -i [--in]      : in put a private key file to search similar instances")
+    print("        -r [--repo]      : repository to note and compare the findings")
+    print("        -p [--path]      : path to search privet key in it")
+    print(" \n\n\n")
 
     sys.exit(2)
 
@@ -276,7 +276,7 @@ def main(argv):
     in_key_file =""
     this_script = argv[0]
 
-    print "We are in Trust module"
+    print("We are in Trust module")
 
     if len(argv) < 3:
         usage(this_script)
@@ -307,11 +307,11 @@ def main(argv):
 
         elif opt in ("-r", "--repo"):
             repo_file = arg
-            print "repo file =" , repo_file
+            print("repo file =" , repo_file)
         pass  # IF BLOCK
     pass  # FOR BLOCK
 
-    print "\n\n The path =", path
+    print("\n\n The path =", path)
 
     # ---- collect the values and check
 

@@ -1,4 +1,4 @@
-from cmd2 import Cmd, make_option, options
+from cmd2 import Cmd 
 import subprocess
 from  modules import *
 
@@ -19,7 +19,7 @@ __status__      =   "BETA"
 
 # Universal Variables
 
-prog = "python"
+prog = "python3"
 
 remote_script   =    " ./modules/remote.py"
 source_script   =    " ./modules/source-scan.py"

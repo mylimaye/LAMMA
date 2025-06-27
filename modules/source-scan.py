@@ -53,18 +53,18 @@ from sys import argv, stdout
 # Returns       : None
 
 def usage(script):
-    print "\n\n     %s [-H] [-s] [-l] [-o] [-p]" %script
-    print "\n       Purpose  : Scan a source code present in a repository present on --path"
-    print "\n       with specified --script. Findings cane be stored in file specified by --out "
-    print "\n               the results can be stored in a Repository for further comparision "
-    print "\n"
-    print "        -H [--help]      : prints this usage help"
-    print "        -s [--script]    : scans the source code on givne Path with specified script"
-    print "        -l [--list]      : list all the scripts on a specified path"
-    print "        -p [--path]      : path of the source code to be scanned"
-    print "        -o [--out]       : file to capture the findings of the scan"
+    print ("\n\n     %s [-H] [-s] [-l] [-o] [-p]" %script)
+    print ("\n       Purpose  : Scan a source code present in a repository present on --path")
+    print ("\n       with specified --script. Findings cane be stored in file specified by --out ")
+    print ("\n               the results can be stored in a Repository for further comparision ")
+    print ("\n")
+    print ("        -H [--help]      : prints this usage help")
+    print ("        -s [--script]    : scans the source code on givne Path with specified script")
+    print ("        -l [--list]      : list all the scripts on a specified path")
+    print ("        -p [--path]      : path of the source code to be scanned")
+    print ("        -o [--out]       : file to capture the findings of the scan")
 
-    print " \n\n\n"
+    print (" \n\n\n")
 
     sys.exit(2)
 
@@ -88,7 +88,6 @@ pass  # USAGE BLOCK
 def list_all_source_scripts(path):
 
     prefix = get_path_prefix()
-
     indir =  prefix + path
 
     for root, dirs, filenames in sorted(os.walk(indir)):
@@ -97,13 +96,13 @@ def list_all_source_scripts(path):
         if ( check_dir.find(".git") != -1):
             continue
 
-        print "./" + root[pos:] + "/"
+        print ("./" + root[pos:] + "/")
 
         for f in filenames:
             if f.endswith(".py"):
                 if (f == "__init__.py"):
                     continue
-                print "\t  ", f
+                print ("\t  "), f
 
     exit(0)
 
@@ -166,13 +165,13 @@ def main(argv):
     in_file = ""
     path = ""
     skip_scan = False
-    cmd_string = "python "
+    cmd_string = "/usr/bin/python3 "
     sink = stdout
     other_opt = ""
 
     # ---- Show the usage for too few arguments
 
-    print "We are in Source module"
+    print ("We are in Source module")
 
     if len(argv) < 3:
         usage(this_script)
@@ -182,7 +181,7 @@ def main(argv):
     # --- try block
 
     try:
-        opts, args = getopt.getopt(argv[1:], "H:s:l:p:o:",
+        opts, args = getopt.getopt(argv[1:], "Hsl:p:o:",
                                    ["help=", "script=", "list=", "path=", "out="])
 
 
@@ -193,6 +192,8 @@ def main(argv):
 
     # ---- Process the arguments passed to the script
 
+    print(', '.join(map(str, opts)))
+    print(', '.join(map(str, args)))
     for opt, arg in opts:
 
         if opt in ("-H", "--help"):
@@ -203,6 +204,7 @@ def main(argv):
 
         elif opt in ("-l", "--list"):
             list_scripts = True
+            print ("List path: " + arg + "\n")
             list_all_source_scripts(arg)
 
         elif opt in ("-p", "--path"):
@@ -234,7 +236,7 @@ def main(argv):
     # -- Check for the Host+Port or Infile
 
     if (path == ""):
-        print "\n\n>> Specify the path of stroe to be scanned"
+        print ("\n\n>> Specify the path of stroe to be scanned")
         skip_scan = True
     else :
         cmd_string = cmd_string + " -p" + " " + path
@@ -253,12 +255,12 @@ def main(argv):
 
     print ("\n\n[+] Starting %s plugin\n\n " %script_set )
 
-    print "\n\n\t Now Executing:  ", (cmd_string), "\n"
+    print ("\n\n\t Now Executing:  ", (cmd_string), "\n")
 
 
     subprocess.call(cmd_string, shell="false")
 
-    print "[+] Exiting The Scan ...\n\n"
+    print ("[+] Exiting The Scan ...\n\n")
 
 
 pass  # main

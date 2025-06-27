@@ -67,13 +67,13 @@ pass
 
 
 def usage():
-    print "\n\n    Purpose  :   This script connects the remote host over SSL/TLS and dumps the Session Information"
-    print "\n\n    Usage    :"
-    print "        -H [--help]      : prints this usage help"
-    print "        -p [--port]      : port on which SSLTLS connection is to be made"
-    print "        -h [--host]      : IP or Domain name of the remote host to be connected"
-    print "        -o [--out]       : Out file in which findings will be reported"
-    print " \n\n\n"
+    print("\n\n    Purpose  :   This script connects the remote host over SSL/TLS and dumps the Session Information")
+    print("\n\n    Usage    :")
+    print("        -H [--help]      : prints this usage help")
+    print("        -p [--port]      : port on which SSLTLS connection is to be made")
+    print("        -h [--host]      : IP or Domain name of the remote host to be connected")
+    print("        -o [--out]       : Out file in which findings will be reported")
+    print(" \n\n\n")
 
     sys.exit(2)
 pass  # USAGE BLOCK
@@ -152,10 +152,11 @@ def main(argv):
 
     with tempfile.TemporaryFile() as tmp:
         proc = subprocess.Popen(
-            ['openssl', 's_client', '-quiet', '-connect', host + ':' + port, '-CAfile', ca_path],
+            #['openssl', 's_client', '-quiet', '-connect', host + ':' + port, '-CAfile', ca_path],
+            ['openssl', 's_client', '-quiet', '-connect', host + ':' + port],
             stderr=tmp, stdout=tmp, stdin=subprocess.PIPE
         )
-        proc.communicate(client_response)
+        proc.communicate(client_response.encode("utf-8"))
 
         if (proc):
             pass
@@ -165,7 +166,7 @@ def main(argv):
         # --- Find the certificate validity
 
         buff = str(tmp.read())
-        print buff
+        print(buff)
 
         indx = buff.find("HTTP/")
         server_response = buff[indx:]

@@ -42,14 +42,14 @@ from sys import argv, stdout
 # Returns       : None
 
 def usage(script):
-    print "\n\n  %s [-o] [-p]  " %script
-    print "\n    Purpose  : Searches use of deprecated function and weak ciphers" 
-    print "                 in a source code repository on --path and reports the "
-    print "                 findings in file --out"
-    print "\n"
-    print "        -o [--out]       : stores the findings of the search in this file"
-    print "        -p [--path]      : path of a source code repository"
-    print " \n\n\n"
+    print("\n\n  %s [-o] [-p]  " %script)
+    print("\n    Purpose  : Searches use of deprecated function and weak ciphers" )
+    print("                 in a source code repository on --path and reports the ")
+    print("                 findings in file --out")
+    print("\n")
+    print("        -o [--out]       : stores the findings of the search in this file")
+    print("        -p [--path]      : path of a source code repository")
+    print(" \n\n\n")
 
     sys.exit(2)
 
@@ -168,7 +168,7 @@ def main(argv):
 
 
     if( path == ""):
-        print "\n The source code directory path not specified Exiting \n\n"
+        print("\n The source code directory path not specified Exiting \n\n")
         return (-2)
     pass
 

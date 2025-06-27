@@ -66,17 +66,17 @@ pass
 # Returns       : None
 
 def usage(script):
-    print "\n\n    %s [-H] [-s] [-l] [-o] [-i] [-p] [-h] " %script
-    print "\n    Purpose  : Scan a remote host with given plugin over SSL/TLS connection"
-    print "\n"
-    print "        -H [--help]      : prints this usage help"
-    print "        -s [--script]    : scan the target with given script id or 'all','gen',  or 'reg'"
-    print "        -l [--list]      : list all the plugins on a specified path"
-    print "        -o [--out]       : reports are stored in this file else default file"
-    print "        -i [--in]        : input file name with multiple IP:Port specified in each line"
-    print "        -p [--port]      : port on which SSL or TLS connection is to be made"
-    print "        -h [--host]      : IP or Domain name of the remote host to be connected"
-    print " \n\n\n"
+    print("\n\n    %s [-H] [-s] [-l] [-o] [-i] [-p] [-h] " %script)
+    print("\n    Purpose  : Scan a remote host with given plugin over SSL/TLS connection")
+    print("\n")
+    print("        -H [--help]      : prints this usage help")
+    print("        -s [--script]    : scan the target with given script id or 'all','gen',  or 'reg'")
+    print("        -l [--list]      : list all the plugins on a specified path")
+    print("        -o [--out]       : reports are stored in this file else default file")
+    print("        -i [--in]        : input file name with multiple IP:Port specified in each line")
+    print("        -p [--port]      : port on which SSL or TLS connection is to be made")
+    print("        -h [--host]      : IP or Domain name of the remote host to be connected")
+    print(" \n\n\n")
 
     sys.exit(2)
 
@@ -113,13 +113,13 @@ def list_all_remote_scripts(path):
         if ( check_dir.find(".git") != -1):
             continue
 
-        print "./" + root[pos:] + "/"
+        print("./" + root[pos:] + "/")
 
         for f in filenames:
             if f.endswith(".py"):
                 if (f == "__init__.py"):
                     continue
-                print "\t  ", f
+                print("\t  ", f)
 
     exit(0)
 
@@ -226,12 +226,12 @@ def main(argv):
 
     if (in_file == ""):
         if (host == ""):
-            print "\n\n>> Target host not specified"
+            print("\n\n>> Target host not specified")
             print ("\n\t pls specify target host name or IPv4")
             print ("\n\t\t -H  host-name or IPv4")
             skip_scan = True
         if (port == 0):
-            print "\n\n>> Target port not specified"
+            print("\n\n>> Target port not specified")
             print ("\n\t pls specify target port")
             print ("\n\t\t -p   TCP/IP port number")
             skip_scan = True
@@ -241,8 +241,8 @@ def main(argv):
     pass
 
     if (skip_scan):
-        print "\n\n>>   [Incomplete Configuration]     "
-        print "\n\n[*]  Lamma Scanning Service [Aborted] .... \n\n\n"
+        print("\n\n>>   [Incomplete Configuration]     ")
+        print("\n\n[*]  Lamma Scanning Service [Aborted] .... \n\n\n")
         sys.exit(2)
 
     pass  # -- If block
@@ -258,8 +258,8 @@ def main(argv):
 
     if (multi_domain == False):
 
-        print "     Target Host => ", host
-        print "     Target port => ", port
+        print("     Target Host => ", host)
+        print("     Target port => ", port)
         target = host
         cmd_string = cmd_string + " -h " + host
         cmd_string = cmd_string + " -p " + port
@@ -271,7 +271,7 @@ def main(argv):
 
     if (out_file != ""):
         sink = open(out_file, "a+")
-        print "     Reports will be stored in file => %s" %out_file
+        print("     Reports will be stored in file => %s" %out_file)
         cmd_string = cmd_string + " -o " + out_file
     pass
 
@@ -301,7 +301,7 @@ def main(argv):
         rscan.html_footer(out_file)
 
 
-    print "[+] Scaning complete...\n\n"
+    print("[+] Scaning complete...\n\n")
 
 
 pass  # main

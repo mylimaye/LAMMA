@@ -72,7 +72,7 @@ def cert_timeline_analysis (cert_start_date, sink):
                 }
 
 
-    print "\nCertificate Time Line Analysis : \n"
+    print("\nCertificate Time Line Analysis : \n")
     for vdate in vuln_dict:
         if (int(cert_start_date) <= int(vdate)):
 
@@ -107,14 +107,14 @@ pass
 # Returns       : None
 
 def usage():
-    print "\n\n    Purpose  :   This script connects the remote host over SSL/TLS and dumps the Session Information"
-    print "\n\n    Usage    :"
-    print "        -H [--help]      : prints this usage help"
-    print "        -p [--port]      : port on which SSLTLS connection is to be made"
-    print "        -h [--host]      : IP or Domain name of the remote host to be connected"
-    print "        -o [--out]       : also downloads the PDF packages "
-    print "        -c [--capath]    : locaiton of trusted root certificates. Linux default path is set by default"
-    print " \n\n\n"
+    print("\n\n    Purpose  :   This script connects the remote host over SSL/TLS and dumps the Session Information")
+    print("\n\n    Usage    :")
+    print("        -H [--help]      : prints this usage help")
+    print("        -p [--port]      : port on which SSLTLS connection is to be made")
+    print("        -h [--host]      : IP or Domain name of the remote host to be connected")
+    print("        -o [--out]       : also downloads the PDF packages ")
+    print("        -c [--capath]    : locaiton of trusted root certificates. Linux default path is set by default")
+    print(" \n\n\n")
 
     sys.exit(2)
 
@@ -266,7 +266,7 @@ def main(argv):
 
     with tempfile.TemporaryFile() as tmp:
         tmp.seek(0)
-        print  tmp.read()
+        print (tmp.read())
     tmp = tempfile.NamedTemporaryFile(delete=True)
 
     #--- Start the scanning process
@@ -279,7 +279,7 @@ def main(argv):
         soc = socket.socket()
         soc.connect((host, int(port)))
 
-    except socket.error, err:
+    except socket.error as err:
         log(("Socket Error Encountered : %s" % err), sink)
         exit(1)
     pass
@@ -289,12 +289,12 @@ def main(argv):
     soc_context = Context(SSLv23_METHOD)
     soc_ssl = Connection(soc_context, soc)
     soc_ssl.set_connect_state()
-    soc_ssl.set_tlsext_host_name(argv[1])
+    soc_ssl.set_tlsext_host_name(argv[1].encode("utf-8"))
 
     try:
         soc_ssl.do_handshake()
-    except OpenSSL.SSL.Error, msg:
-        print " \n\n Unable to complet the SSL Handshake %s" % msg
+    except OpenSSL.SSL.Error as msg:
+        print(" \n\n Unable to complet the SSL Handshake %s" % msg)
         exit(1)
     pass
 
@@ -348,11 +348,11 @@ def main(argv):
     cert_starts = cert.get_notBefore()
     cert_ends = cert.get_notAfter()
 
-    log("\nStart Date : " + cert_starts, sink)
+    log("\nStart Date : " + cert_starts.decode("utf-8"), sink)
 
     cert_timeline_analysis(cert_starts[:8], sink)
 
-    log("\nEnd Date   : " + cert_ends, sink)
+    log("\nEnd Date   : " + cert_ends.decode("utf-8"), sink)
 
 
     #--- Time line Analyize the certificate for applicable CVEs
@@ -362,7 +362,7 @@ def main(argv):
 
     # print "\nSerial Number", cert.get_serial_number()
 
-    sign_algo = cert.get_signature_algorithm()
+    sign_algo = cert.get_signature_algorithm().decode("utf-8")
 
     # --- Check for Algorithm Signing Strength -----
 

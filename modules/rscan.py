@@ -115,16 +115,16 @@ pass
 
 
 def kick_dir(indir, param):
-    prog = "python "
+    prog = "/usr/bin/python3 "
 
-    print "[+] Kick Starting...", indir
+    print("[+] Kick Starting...", indir)
     for root, dirs, filenames in sorted(os.walk(indir)):
         for f in filenames:
             if f.endswith("__init__.py"):
                 continue
             if f.endswith(".py"):
                 cmd = (prog + root + "/" + f + " " + param)
-                print "\n\n\t Now Executing:  ", (cmd), "\n"
+                print("\n\n\t Now Executing:  ", (cmd), "\n")
                 subprocess.call(cmd, shell="false")
                 # subprocess.Popen(cmd, stdout=f, stderr=e, stdin=subprocess.PIPE) #, stdout=f )
     pass
@@ -149,7 +149,7 @@ pass
 
 
 def script_invoke(script_dir, param):
-    prog = "python "
+    prog = "/usr/bin/python3 "
 
     indir = os.getcwd()
     indir = indir + "/modules/remote-module/"
@@ -157,18 +157,18 @@ def script_invoke(script_dir, param):
     if (script_dir.endswith(".py")):
 
         cmd = (prog + indir + script_dir + " " + param)
-        print "Executing : ", cmd
+        print("Executing : ", cmd)
         subprocess.call(cmd, shell="false")
         # subprocess.Popen(cmd, stdout=f, stderr=e, stdin=subprocess.PIPE) #, stdout=f )
 
     elif (script_dir.endswith("all")):  # if all are to be executed
-        print "\n\n Kick %s \n\n" % script_dir
+        print("\n\n Kick %s \n\n" % script_dir)
         kick_dir(indir + "gen", param)
         kick_dir(indir + "reg", param)
         kick_dir(indir + "others", param)
 
     else:
-        print "\n\n Kick %s \n\n" % script_dir
+        print("\n\n Kick %s \n\n" % script_dir)
         kick_dir(indir + script_dir, param)
 
 

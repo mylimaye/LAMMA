@@ -51,15 +51,15 @@ from sys import argv, stdout
 # Returns       : None
 
 def usage(script):
-    print "\n\n    %s [-H] [-s] [-l] [-o] [-p] [-i] " %script
-    print "\n    Purpose  : Scan a trust/key store at given Path with a specided script "
-    print "\n               the results can be stored in a Repository for further comparision "
-    print "\n"
-    print "        -H [--help]      : prints this usage help"
-    print "        -s [--script]    : scan the target with given script"
-    print "        -l [--list]      : list all the plugins on a specified path"
-    print "        -p [--path]      : path of Key or Certificate store to be scanned"
-    print " \n\n\n"
+    print("\n\n    %s [-H] [-s] [-l] [-o] [-p] [-i] " %script)
+    print("\n    Purpose  : Scan a trust/key store at given Path with a specided script ")
+    print("\n               the results can be stored in a Repository for further comparision ")
+    print("\n")
+    print("        -H [--help]      : prints this usage help")
+    print("        -s [--script]    : scan the target with given script")
+    print("        -l [--list]      : list all the plugins on a specified path")
+    print("        -p [--path]      : path of Key or Certificate store to be scanned")
+    print(" \n\n\n")
 
     sys.exit(2)
 
@@ -92,13 +92,13 @@ def list_all_trust_scripts(path):
         if ( check_dir.find(".git") != -1):
             continue
 
-        print "./" + root[pos:] + "/"
+        print("./" + root[pos:] + "/")
 
         for f in filenames:
             if f.endswith(".py"):
                 if (f == "__init__.py"):
                     continue
-                print "\t  ", f
+                print("\t  ", f)
 
     exit(0)
 
@@ -161,13 +161,13 @@ def main(argv):
     in_file = ""
     path = ""
     skip_scan = False
-    cmd_string = "python "
+    cmd_string = "/usr/bin/python3 "
     sink = stdout
     other_opt = ""
 
     # ---- Show the usage for too few arguments
 
-    print "We are in Trust module"
+    print("We are in Trust module")
 
     if len(argv) < 3:
         usage(this_script)
@@ -234,7 +234,7 @@ def main(argv):
     # -- Check for the Host+Port or Infile
 
     if (path == ""):
-        print "\n\n>> Specify the path of stroe to be scanned"
+        print("\n\n>> Specify the path of stroe to be scanned")
         skip_scan = True
     else :
         cmd_string = cmd_string + " -p" + " " + path
@@ -248,12 +248,12 @@ def main(argv):
 
     print ("\n\n[+] Starting %s plugin\n\n " %script_set )
 
-    print "\n\n\t Now Executing:  ", (cmd_string), "\n"
+    print("\n\n\t Now Executing:  ", (cmd_string), "\n")
 
 
     subprocess.call(cmd_string, shell="false")
 
-    print "[+] Exiting The Scan ...\n\n"
+    print("[+] Exiting The Scan ...\n\n")
 
 
 pass  # main
